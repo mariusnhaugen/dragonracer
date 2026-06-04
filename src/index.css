@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@theme {
+  --color-wiki-bg:      #14172a; /* page background */
+  --color-wiki-surface: #1e2335; /* cards, panels, filter bar */
+  --color-wiki-muted:   #222840; /* completed rows, darker surface */
+  --color-wiki-hover:   #272d4b; /* row hover */
+  --color-wiki-raised:  #2a3045; /* headers, buttons, borders */
+  --color-wiki-blue:    #8CABE6; /* accent — requirements, region pills, focus */
+  --color-wiki-text:    #c8c8c8; /* primary text */
+  --color-wiki-link:    #4a9eca; /* link / interactive highlight */
+}
