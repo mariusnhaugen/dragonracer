@@ -2,14 +2,14 @@ import { render, screen, within } from '@testing-library/react';
 import { TaskTable } from '../../src/components/TaskTable';
 import { tasksFixture } from '../../src/mocks/handlers';
 
-let noopHandlers = {
+const noopHandlers = {
     onToggleComplete: vi.fn(),
     onToggleSelect: vi.fn(),
     onAddTag: vi.fn(),
     onRemoveTag: vi.fn(),
 }
 
-let defaultProps = {
+const defaultProps = {
     selectMode: false,
     tagMode: false,
     completedIds: new Set<number>(),
@@ -21,7 +21,7 @@ let defaultProps = {
 it('Shows the same amount of rows as tasks passed', () => {
     render(<TaskTable tasks={tasksFixture} {...defaultProps}{...noopHandlers} />)
     expect(screen.getByText("Kill a goblin")).toBeTruthy();
-    const [_, tbody] = screen.getAllByRole('rowgroup');
+    const [, tbody] = screen.getAllByRole('rowgroup');
     expect(within(tbody).getAllByRole('row')).toHaveLength(tasksFixture.length);
 });
 
