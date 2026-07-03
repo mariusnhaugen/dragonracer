@@ -1,4 +1,4 @@
-# Design System — OSRS Leagues Planner
+# Design System — DragonRacer Client
 
 Dark-themed UI modelled on the OSRS wiki's colour palette. Built with Tailwind CSS v4.
 

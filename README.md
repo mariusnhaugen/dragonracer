@@ -1,73 +1,41 @@
-# React + TypeScript + Vite
+# DragonRacer Client
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Web UI for **DragonRacer** — a task tracker for Old School RuneScape Leagues (currently targeting **Demonic Pacts League**). The official wiki task list has no completion tracking, grouping, or filtering; DragonRacer fills that gap, with in-game completion synced automatically via a companion RuneLite plugin and server.
 
-Currently, two official plugins are available:
+This repo is the React client. It talks to the DragonRacer server, which receives task-completion data from the RuneLite plugin.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+- Full task catalog with tier, region, and points, fetched from the server (ETag-cached)
+- Player lookup by OSRS username — pulls completed tasks and skill levels synced from in-game
+- Manual completion toggling, tier/region/search filters, hide-completed
+- User-defined task groups and per-task tags
+- Progress stats: overall points bar plus per-tier breakdown
+- All local UI state persisted to localStorage
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Stack
 
-## Expanding the ESLint configuration
+- React 19 + Vite + TypeScript
+- Tailwind CSS v4 (via `@tailwindcss/vite`)
+- Vitest + Testing Library + MSW for tests
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting started
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cp .env.local.example .env.local   # set VITE_API_BASE to your DragonRacer server
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Scripts
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev            # start dev server
+npm run build          # type-check + production build
+npm run lint           # eslint
+npm test               # run test suite once
+npm run test:watch     # vitest watch mode
+npm run test:coverage  # coverage report
 ```
+
+Tests run in CI on every push/PR to `main` (`.github/workflows/run_tests.yml`).
